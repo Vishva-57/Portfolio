@@ -1,6 +1,6 @@
-# Harsh Goyal — Developer & Designer Portfolio
+# VISHVANTH S — Software Engineer Portfolio
 
-A dark-themed personal portfolio for **Harsh Goyal** — Computer Science graduate from NSUT, currently a Content R&D Trainee at PhysicsWallah. Focused on UI/UX, front-end development, and GenAI integration.
+A dark-themed personal portfolio website for **VISHVANTH S** — Software Engineer (WEB and APP developer). Focused on front-end development, mobile app development (Flutter), UI/UX design, and AI-assisted workflows.
 
 Built with **React + TypeScript + Vite + Tailwind CSS + Framer Motion**. Designed for one-click deployment on **Vercel**.
 
@@ -15,11 +15,15 @@ Built with **React + TypeScript + Vite + Tailwind CSS + Framer Motion**. Designe
 
 ## Sections
 
-1. **Hero** — name, tagline, magnetic-hover portrait
-2. **About** — bio + skills grouped by Languages / Frameworks / Tools / AI
-3. **Services** — UI/UX Design, Web Design, Front-end Development, GenAI Integration
-4. **Projects** — sticky-stacking cards for AI Tutor, PiLearn, ResumeIQ, Notch
-5. **Contact** — Email, WhatsApp, LinkedIn, GitHub
+1. **Hero** — Immersive background video (`intro.mp4`) that unmutes on user interaction, tagline, navigation bar.
+2. **About** — Bio, languages spoken, timeline-driven education pathway.
+3. **Education** — Glowing vertical timeline linking Vellore Institute of Technology, Velammal Bodhi Campus, and Vidya Mandir School.
+4. **Services** — Web Development, App Development, UI/UX Design.
+5. **Projects** — Sticky-stacking card showcases:
+   - **SecureCity** (Mobile App Development): Flutter application for urban safety, including live map tracking, emergency SOS support, and a pet adoption portal. Features horizontal mobile screens, direct APK downloads (`securecity.apk`), and github repository buttons.
+   - **Smart Classroom** (Web Platform): Attendance scanner management platform with anti-proxy QR codes. Linked to live deployment on Render and GitHub repo.
+6. **Certifications** — Google AI Professional Certificate, Network Basics (Cisco), IoT (Cisco), AI Tools Workshop (B10x).
+7. **Contact** — Email, WhatsApp, LinkedIn, GitHub.
 
 ## Run locally
 
@@ -42,11 +46,13 @@ src/
 ├── main.tsx                   # React entry
 ├── index.css                  # global styles + .hero-heading gradient
 └── components/
-    ├── HeroSection.tsx        # navbar, massive heading, magnetic portrait
+    ├── HeroSection.tsx        # navbar, background video overlay, taglines
     ├── AboutSection.tsx       # bio, animated text, skills grid
-    ├── ServicesSection.tsx    # white section, 4 numbered services
+    ├── EducationSection.tsx   # glowing vertical education timeline
+    ├── ServicesSection.tsx    # white section, custom services
     ├── ProjectsSection.tsx    # sticky-stacking project cards
-    ├── ContactSection.tsx     # 4 contact methods with icons
+    ├── CertificationsSection.tsx # grid of credentials with descriptions
+    ├── ContactSection.tsx     # contact channels with custom SVG icons
     │
     ├── ContactButton.tsx      # gradient pill CTA
     ├── LiveProjectButton.tsx  # ghost outline pill
@@ -57,24 +63,11 @@ src/
 
 ## Featured projects
 
-| Project | Live | Built with |
+| Project | Live Website / Build | Source Code (GitHub) |
 |---|---|---|
-| ResumeIQ | [resumeiq-harsh.vercel.app](https://resumeiq-harsh.vercel.app) | React, Gemini API, Vercel |
-| Notch | [notch-zeta.vercel.app](https://notch-zeta.vercel.app) | React, Tailwind, Framer Motion |
-
-## Customisation
-
-| Want to change | Open this file |
-|---|---|
-| Name, nav links, hero text | `src/components/HeroSection.tsx` |
-| About paragraph, skills list | `src/components/AboutSection.tsx` |
-| Services list | `src/components/ServicesSection.tsx` (`SERVICES` array) |
-| Projects, screenshots, live URLs | `src/components/ProjectsSection.tsx` (`PROJECTS` array) |
-| Contact methods | `src/components/ContactSection.tsx` (`CONTACT_METHODS` array) |
-| Project screenshots | drop new images in `public/` and reference as `/filename.png` |
-| Brand gradient, font, dark colour | `src/index.css` and `tailwind.config.js` |
-| Page title, meta description | `index.html` |
+| SecureCity | `/securecity.apk` (Download APK) | [github.com/Vishva-57/SecureCity](https://github.com/Vishva-57/SecureCity) |
+| Smart Classroom | [smart-classroom-system-etvl.onrender.com](https://smart-classroom-system-etvl.onrender.com/) | [github.com/Vishva-57/Smart-Classroom-System](https://github.com/Vishva-57/Smart-Classroom-System) |
 
 ## Credits
 
-Designed & built by **Harsh Goyal** · [LinkedIn](https://www.linkedin.com/in/harsh-goyal-7900b2256/) · [GitHub](https://github.com/harshgoyal27)
+Designed & built by **VISHVANTH S** · [LinkedIn](https://www.linkedin.com/in/vishvanth-s-50153v) · [GitHub](https://github.com/Vishva-57)
