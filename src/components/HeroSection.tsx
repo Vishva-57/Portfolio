@@ -3,7 +3,9 @@ import FadeIn from './FadeIn';
 
 const NAV_LINKS = [
   { label: 'About', href: '#about' },
+  { label: 'Education', href: '#education' },
   { label: 'Projects', href: '#projects' },
+  { label: 'Certificates', href: '#certificates' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -12,6 +14,50 @@ const HeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
   const [showSoundHint, setShowSoundHint] = useState(true);
+
+  // Attempt unmuted autoplay and fallback to muted if blocked by browser policy
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+
+    let cleanupListeners = () => {};
+
+    // Try playing unmuted first
+    v.muted = false;
+    setMuted(false);
+
+    v.play().catch((err) => {
+      console.log('Autoplay unmuted blocked, falling back to muted:', err);
+      // Browser blocked it, so fallback to muted to allow autoplay to start
+      v.muted = true;
+      setMuted(true);
+      v.play().catch((e) => console.error('Muted autoplay failed:', e));
+
+      // Listen for the first user interaction (click/touch/keypress) to automatically unmute
+      const unmuteOnInteraction = () => {
+        if (v.muted) {
+          v.muted = false;
+          setMuted(false);
+          setShowSoundHint(false);
+        }
+        cleanupListeners();
+      };
+
+      cleanupListeners = () => {
+        window.removeEventListener('click', unmuteOnInteraction);
+        window.removeEventListener('touchstart', unmuteOnInteraction);
+        window.removeEventListener('keydown', unmuteOnInteraction);
+      };
+
+      window.addEventListener('click', unmuteOnInteraction);
+      window.addEventListener('touchstart', unmuteOnInteraction);
+      window.addEventListener('keydown', unmuteOnInteraction);
+    });
+
+    return () => {
+      cleanupListeners();
+    };
+  }, []);
 
   // Auto-hide "Tap for sound" hint after 5 seconds
   useEffect(() => {
@@ -90,7 +136,7 @@ const HeroSection = () => {
       <video
         ref={videoRef}
         autoPlay
-        muted
+        muted={muted}
         loop
         playsInline
         preload="auto"
@@ -107,7 +153,7 @@ const HeroSection = () => {
       <div className="relative z-10 flex h-full flex-col">
         {/* Top bar */}
         <FadeIn delay={0} y={-20} className="relative">
-          <div className="flex items-center justify-between px-6 md:px-10 pt-6 md:pt-8">
+          <div className="flex items-center justify-between px-6 md:px-10 pt-6 md:pt-8 w-full">
             <ul className="flex items-center gap-5 sm:gap-8 md:gap-12">
               {NAV_LINKS.map((link) => (
                 <li key={link.label}>
@@ -121,12 +167,21 @@ const HeroSection = () => {
               ))}
             </ul>
 
-            <a
-              href="#contact"
-              className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-xs font-medium uppercase tracking-[0.2em] text-white backdrop-blur-md transition hover:bg-white/20 hover:scale-[1.03]"
-            >
-              Email me
-            </a>
+            <div className="flex items-center gap-3">
+              <a
+                href="/Resume.pdf"
+                download="Vishvanth_Resume.pdf"
+                className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-xs font-medium uppercase tracking-[0.2em] text-white backdrop-blur-md transition hover:bg-white/20 hover:scale-[1.03]"
+              >
+                Resume
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex items-center rounded-full bg-white px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-xs font-medium uppercase tracking-[0.2em] text-black transition hover:bg-white/90 hover:scale-[1.03]"
+              >
+                Contact
+              </a>
+            </div>
           </div>
         </FadeIn>
 
@@ -142,15 +197,15 @@ const HeroSection = () => {
             <FadeIn delay={0.5} y={40}>
               <h1
                 className="font-black uppercase leading-[0.88] tracking-tight text-white"
-                style={{ fontSize: 'clamp(3rem, 12vw, 10.5rem)' }}
+                style={{ fontSize: 'clamp(3rem, 10vw, 8.5rem)' }}
               >
-                Harsh<br />Goyal
+                VISHVANTH<br />S
               </h1>
             </FadeIn>
 
             <FadeIn delay={0.85} y={20}>
               <p className="mt-5 md:mt-7 text-[10px] sm:text-xs md:text-sm font-medium uppercase tracking-[0.3em] text-white/75">
-                Developer · Designer · GenAI Integration
+                Software Engineer (WEB and APP developer)
               </p>
             </FadeIn>
           </div>

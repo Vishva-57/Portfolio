@@ -4,33 +4,21 @@ import FadeIn from './FadeIn';
 const SERVICES = [
   {
     number: '01',
-    title: 'UI/UX Design',
+    title: 'Web Development',
     description:
-      'Designing clean, intuitive interfaces that prioritise user flow, hierarchy, and visual clarity — turning ideas into experiences people actually enjoy using.',
+      'Designing and developing responsive, modern, and user-friendly websites tailored to business and personal needs. Focused on performance, functionality, and seamless user experience across all devices.',
   },
   {
     number: '02',
-    title: 'Front-end Development',
+    title: 'App Development',
     description:
-      'Building responsive, performant web apps with React, TypeScript, and Tailwind — pixel-perfect on every screen, deployed seamlessly on Vercel.',
+      'Building intuitive and scalable mobile applications with clean interfaces and reliable functionality. Delivering solutions that enhance user engagement and meet real-world business requirements.',
   },
   {
     number: '03',
-    title: 'GenAI Integration',
+    title: 'UI/UX Design',
     description:
-      'Wiring large language models into real products via Gemini, Claude, and OpenAI APIs — from resume reviewers to AI tutors and beyond.',
-  },
-  {
-    number: '04',
-    title: 'Prompt Engineering & LLM Automation',
-    description:
-      'Crafting reliable prompts and automation flows that turn LLMs into production-grade tools for content, analysis, and decision support.',
-  },
-  {
-    number: '05',
-    title: 'Data Analysis & Visualization',
-    description:
-      'Exploring datasets with Python (Pandas, NumPy, Seaborn) and Power BI — turning raw numbers into clear insights and dashboards stakeholders can act on.',
+      'Designing clean, intuitive interfaces that prioritise user flow, hierarchy, and visual clarity — turning ideas into experiences people actually enjoy using.',
   },
 ];
 

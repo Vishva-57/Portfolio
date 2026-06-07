@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Download } from 'lucide-react';
 import FadeIn from './FadeIn';
 import LiveProjectButton from './LiveProjectButton';
 
@@ -7,48 +8,39 @@ interface ProjectData {
   number: string;
   category: string;
   name: string;
+  description: string;
   liveUrl: string;
+  downloadUrl?: string;
+  githubUrl?: string;
   col1Image1: string;
-  col1Image2: string;
-  col2Image: string;
+  col1Image2?: string;
+  col2Image?: string;
 }
 
 const PROJECTS: ProjectData[] = [
-    {
-        number: '01',
-        category: 'Personal',
-        name: 'Forge',
-        liveUrl: 'https://forge-pink-seven.vercel.app/',
-        col1Image1: '/Forge.png',
-        col1Image2: '/Forge1.png',
-        col2Image: '/Forge2.png',
-      },
   {
-      number: '02',
-      category: 'Personal',
-      name: 'LawLab',
-      liveUrl: 'https://lawlab-self.vercel.app',
-      col1Image1: '/lawlab.png',
-      col1Image2: '/lawlab1.png',
-      col2Image: '/lawlab2.png',
-    },
-  {
-    number: '03',
-    category: 'Personal · GenAI',
-    name: 'ResumeIQ',
-    liveUrl: 'https://resumeiq-harsh.vercel.app/',
-    col1Image1: '/resumeiq-hero.png',
-    col1Image2: '/resumeiq-feedback.png',
-    col2Image: '/resumeiq-score.png',
+    number: '01',
+    category: 'Mobile App Development',
+    name: 'SecureCity',
+    description: `SecureCity is a Flutter-based mobile application that promotes urban safety through real-time reporting and tracking of stray animals, garbage dumps, and other civic issues. The app features GPS-based location tracking, proximity alerts, emergency SOS support, and a pet adoption portal, helping citizens contribute to safer and cleaner communities.
+
+Tech Stack: Flutter, Firebase, Google Maps API 🚀`,
+    liveUrl: 'https://github.com/Vishva-57/SecureCity',
+    downloadUrl: '/securecity.apk',
+    col1Image1: '/securecity-1.jpg',
+    col1Image2: '/securecity-2.jpg',
+    col2Image: '/securecity-3.jpg',
   },
   {
-    number: '04',
-    category: 'Personal · Design',
-    name: 'Notch',
-    liveUrl: 'https://notch-zeta.vercel.app/',
-    col1Image1: '/notch-hero.png',
-    col1Image2: '/notch-pricing.png',
-    col2Image: '/notch-mockup.png',
+    number: '02',
+    category: 'Web Platform',
+    name: 'Smart Classroom',
+    description: `Smart Classroom Management System is a web-based platform featuring secure QR-code attendance verification to prevent proxy entries. The application facilitates teacher-student chat for doubt clarification, study material sharing, and assignment submission.
+
+Tech Stack: React.js, Python, MongoDB, SQL 🚀`,
+    liveUrl: 'https://smart-classroom-system-etvl.onrender.com/',
+    githubUrl: 'https://github.com/Vishva-57/Smart-Classroom-System',
+    col1Image1: '/smartclassroom-dashboard.png',
   },
 ];
 
@@ -76,83 +68,78 @@ const ProjectCard = ({ project, index, total, containerRef }: ProjectCardProps) 
   return (
     <div
       ref={cardRef}
-      className="sticky top-24 md:top-32 h-[85vh] w-full"
-      style={{ top: `${96 + index * 28}px` }}
+      className="sticky top-20 sm:top-24 md:top-32 min-h-[85vh] md:h-[80vh] lg:h-[85vh] w-full flex items-center justify-center pb-8 md:pb-0"
+      style={{ top: `${80 + index * 28}px` }}
     >
       <motion.article
         style={{ scale }}
-        className="origin-top mx-auto h-full w-full flex flex-col gap-4 sm:gap-6 md:gap-8 rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:p-6 md:p-8"
+        className="origin-top mx-auto min-h-[80vh] md:h-full w-full flex flex-col justify-center rounded-[30px] sm:rounded-[45px] md:rounded-[50px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-6 sm:p-8 md:p-10 lg:p-12 shadow-2xl"
       >
-          {/* Top row: number + meta + button */}
-                  <div className="flex flex-col sm:flex-row items-start sm:justify-between gap-4 sm:gap-6">
-                    <div className="flex flex-row items-start gap-3 sm:gap-6 md:gap-10 min-w-0 w-full">
-                      <div
-                        className="shrink-0 font-black text-[#D7E2EA] leading-none"
-                        style={{ fontSize: 'clamp(2.5rem, 10vw, 140px)' }}
-                      >
-                        {project.number}
-                      </div>
-
-                      <div className="flex flex-col gap-1 sm:gap-3 pt-1 sm:pt-3 md:pt-4 min-w-0 flex-1">
-                        <span
-                          className="font-light uppercase tracking-widest text-[#D7E2EA]/60"
-                          style={{ fontSize: 'clamp(0.65rem, 1.2vw, 1rem)' }}
-                        >
-                          {project.category}
-                        </span>
-                        <h3
-                          className="font-medium uppercase text-[#D7E2EA] leading-tight"
-                          style={{ fontSize: 'clamp(1.1rem, 2.2vw, 2.1rem)' }}
-                        >
-                          {project.name}
-                        </h3>
-                      </div>
-                    </div>
-
-                    <div className="shrink-0 self-start sm:self-auto pt-1 sm:pt-2 md:pt-3 w-full sm:w-auto">
-                      <LiveProjectButton href={project.liveUrl} className="w-full sm:w-auto" />
-                    </div>
-                  </div>
-
-        {/* Bottom row: two-column image grid */}
-        <div className="grid grid-cols-[40%_60%] gap-3 sm:gap-4 md:gap-5 flex-1 min-h-0">
-          {/* Left column - 2 stacked */}
-          <div className="flex flex-col gap-3 sm:gap-4 md:gap-5 min-h-0">
-            <div
-              className="overflow-hidden rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
-              style={{ height: 'clamp(130px, 16vw, 230px)' }}
-            >
-              <img
-                src={project.col1Image1}
-                alt={`${project.name} preview 1`}
-                className="h-full w-full object-cover"
-                loading="lazy"
-                draggable={false}
-              />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 flex-1 min-h-0 items-stretch md:items-center">
+          {/* Left Column: Details */}
+          <div className="flex flex-col justify-between md:h-full py-2 md:py-6 min-w-0">
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <span className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-[#D7E2EA]/60">
+                  {project.category}
+                </span>
+                <div className="text-[3.5rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem] font-black text-[#D7E2EA]/15 leading-none select-none">
+                  {project.number}
+                </div>
+              </div>
+              <h3 className="font-bold uppercase text-white tracking-tight" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
+                {project.name}
+              </h3>
+              <p className="text-xs sm:text-sm md:text-[15px] text-[#D7E2EA]/80 font-light leading-relaxed max-w-xl whitespace-pre-line overflow-y-auto max-h-[30vh] md:max-h-[35vh] pr-2">
+                {project.description}
+              </p>
             </div>
-            <div
-              className="overflow-hidden rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
-              style={{ height: 'clamp(160px, 22vw, 340px)' }}
-            >
-              <img
-                src={project.col1Image2}
-                alt={`${project.name} preview 2`}
-                className="h-full w-full object-cover"
-                loading="lazy"
-                draggable={false}
-              />
+            <div className="pt-6 flex flex-col sm:flex-row gap-3.5 items-stretch sm:items-center">
+              {project.downloadUrl && (
+                <a
+                  href={project.downloadUrl}
+                  download
+                  className="inline-flex items-center justify-center gap-2.5 rounded-full bg-[#D7E2EA] px-8 py-3 sm:px-10 sm:py-3.5 text-sm sm:text-base font-semibold uppercase tracking-widest text-[#0C0C0C] whitespace-nowrap transition-all duration-200 hover:bg-white hover:scale-[1.02] active:scale-98 w-full sm:w-auto shadow-lg shadow-white/5"
+                >
+                  <Download size={18} />
+                  Download APK
+                </a>
+              )}
+              {project.githubUrl ? (
+                <>
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2.5 rounded-full bg-[#D7E2EA] px-8 py-3 sm:px-10 sm:py-3.5 text-sm sm:text-base font-semibold uppercase tracking-widest text-[#0C0C0C] whitespace-nowrap transition-all duration-200 hover:bg-white hover:scale-[1.02] active:scale-98 w-full sm:w-auto shadow-lg shadow-white/5"
+                  >
+                    Live Project
+                  </a>
+                  <LiveProjectButton label="DIVE DEEP" href={project.githubUrl} className="w-full sm:w-auto" />
+                </>
+              ) : (
+                <LiveProjectButton label={project.name === 'SecureCity' ? 'DIVE DEEP' : 'Live Project'} href={project.liveUrl} className="w-full sm:w-auto" />
+              )}
             </div>
           </div>
 
-          {/* Right column - 1 tall */}
-          <div className="overflow-hidden rounded-[40px] sm:rounded-[50px] md:rounded-[60px] min-h-0">
-            <img
-              src={project.col2Image}
-              alt={`${project.name} preview 3`}
-              className="h-full w-full object-cover"
-              loading="lazy"
-              draggable={false}
-            />
+          {/* Right Column: Images (original size, don't crop) */}
+          <div className="w-full md:h-full flex items-center justify-center min-h-0 overflow-visible md:overflow-hidden py-4 md:py-0">
+            {project.name === 'SecureCity' ? (
+              <div className="flex flex-row gap-2 sm:gap-3.5 h-full max-h-[40vh] md:max-h-[55vh] lg:max-h-[60vh] justify-center items-center w-full">
+                <img src={project.col1Image1} alt="SecureCity 1" className="h-full max-h-[35vh] md:max-h-[50vh] lg:max-h-[55vh] w-auto object-contain rounded-xl sm:rounded-2xl border border-white/10 shadow-lg hover:scale-[1.02] transition-transform duration-300" />
+                <img src={project.col1Image2} alt="SecureCity 2" className="h-full max-h-[35vh] md:max-h-[50vh] lg:max-h-[55vh] w-auto object-contain rounded-xl sm:rounded-2xl border border-white/10 shadow-lg hover:scale-[1.02] transition-transform duration-300" />
+                <img src={project.col2Image} alt="SecureCity 3" className="h-full max-h-[35vh] md:max-h-[50vh] lg:max-h-[55vh] w-auto object-contain rounded-xl sm:rounded-2xl border border-white/10 shadow-lg hover:scale-[1.02] transition-transform duration-300" />
+              </div>
+            ) : (
+              <div className="w-full h-full max-h-[40vh] md:max-h-[55vh] lg:max-h-[60vh] flex items-center justify-center">
+                <img
+                  src={project.col1Image1}
+                  alt={`${project.name} Dashboard`}
+                  className="max-w-full max-h-[35vh] md:max-h-[50vh] lg:max-h-[55vh] w-auto object-contain rounded-xl sm:rounded-2xl border border-white/10 shadow-lg hover:scale-[1.02] transition-transform duration-300"
+                />
+              </div>
+            )}
           </div>
         </div>
       </motion.article>

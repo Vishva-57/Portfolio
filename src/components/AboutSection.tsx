@@ -3,7 +3,7 @@ import ContactButton from './ContactButton';
 import AnimatedText from './AnimatedText';
 
 const ABOUT_TEXT =
-  "I'm a Computer Science graduate from NSUT, currently a Content R&D Trainee at PhysicsWallah, where I help ship live, customer-facing learning products. I focus on UI/UX, front-end development, and GenAI integration — turning rough ideas into clean, engaging digital experiences. Let's build something incredible together!";
+  "I am a passionate Computer Science student with a strong interest in web and app development, artificial intelligence, and digital marketing. I enjoy building modern, user-friendly websites and apps and exploring AI tools to create innovative content like videos and images. With a problem-solving mindset, I constantly strive to learn and apply new technologies. My goal is to grow into a full-stack developer while also excelling in digital marketing.";
 
 const AboutSection = () => {
   return (
@@ -99,20 +99,20 @@ const AboutSection = () => {
                       <div className="flex flex-col gap-5 sm:gap-6">
                         {[
                           {
+                            label: 'Programming Languages',
+                            items: ['Python', 'C', 'C++', 'Java', 'HTML', 'JavaScript', 'CSS'],
+                          },
+                          {
+                            label: 'Development Skills',
+                            items: ['Vibe Coding', 'Prompt Engineering'],
+                          },
+                          {
+                            label: 'Professional Skills',
+                            items: ['Problem Solving', 'Project Management', 'Teamwork', 'Time Management', 'Effective Communication', 'Leadership', 'Critical Thinking'],
+                          },
+                          {
                             label: 'Languages',
-                            items: ['Python', 'JavaScript', 'HTML', 'CSS', 'SQL'],
-                          },
-                          {
-                            label: 'Frameworks & Libraries',
-                            items: ['React', 'Tailwind', 'Pandas', 'NumPy', 'Scikit-learn', 'NLTK'],
-                          },
-                          {
-                            label: 'Tools & Platforms',
-                            items: ['Figma', 'Vercel', 'Git', 'GitHub', 'Power BI', 'Canva', 'Excel'],
-                          },
-                          {
-                            label: 'AI & GenAI',
-                            items: ['Gemini', 'Claude', 'OpenAI', 'Prompt engineering'],
+                            items: ['English (Fluent)', 'Tamil (Fluent)', 'Spanish (Basics)'],
                           },
                         ].map((group) => (
                           <div

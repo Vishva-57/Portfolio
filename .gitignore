@@ -8,3 +8,10 @@ dist-ssr
 .DS_Store
 .vscode
 .idea
+
+# Unused root assets and backups
+old_portfolio_html/
+/profile.jpg
+/Resume.pdf
+/harsh.png
+/intro.mp4
