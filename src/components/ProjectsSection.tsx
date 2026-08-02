@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Download } from 'lucide-react';
 import FadeIn from './FadeIn';
@@ -42,6 +42,19 @@ Tech Stack: React.js, Python, MongoDB, SQL 🚀`,
     githubUrl: 'https://github.com/Vishva-57/Smart-Classroom-System',
     col1Image1: '/smartclassroom-dashboard.png',
   },
+  {
+    number: '03',
+    category: 'AI Web Platform',
+    name: 'Basilisk Blind Spot',
+    description: `Basilisk's Blind Spot is a full-stack AI-powered web accessibility auditing platform that evaluates websites against WCAG 2.1 AA standards. Built with Next.js, TypeScript, Playwright, Axe-core, Prisma, and Tailwind CSS, it automatically detects accessibility issues, generates detailed reports with severity-based insights, and provides actionable recommendations to help developers create more inclusive and accessible web applications.
+
+Tech Stack: Next.js, TypeScript, Playwright, Axe-core, Prisma, Tailwind CSS, Vercel 🚀`,
+    liveUrl: 'https://basiliskblindspot.netlify.app/',
+    githubUrl: 'https://github.com/Vishva-57/Basilisk-Blind-Spot/',
+    col1Image1: '/basilisk-1.png',
+    col1Image2: '/basilisk-2.png',
+    col2Image: '/basilisk-3.png',
+  },
 ];
 
 interface ProjectCardProps {
@@ -53,6 +66,8 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ project, index, total, containerRef }: ProjectCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const images = [project.col1Image1, project.col1Image2, project.col2Image].filter(Boolean) as string[];
+  const [activeImgIndex, setActiveImgIndex] = useState(0);
 
   // Scroll progress for THIS card relative to the whole projects scroll range.
   const { scrollYProgress } = useScroll({
@@ -123,13 +138,42 @@ const ProjectCard = ({ project, index, total, containerRef }: ProjectCardProps) 
             </div>
           </div>
 
-          {/* Right Column: Images (original size, don't crop) */}
+          {/* Right Column: Images */}
           <div className="w-full md:h-full flex items-center justify-center min-h-0 overflow-visible md:overflow-hidden py-4 md:py-0">
             {project.name === 'SecureCity' ? (
               <div className="flex flex-row gap-2 sm:gap-3.5 h-full max-h-[40vh] md:max-h-[55vh] lg:max-h-[60vh] justify-center items-center w-full">
                 <img src={project.col1Image1} alt="SecureCity 1" className="h-full max-h-[35vh] md:max-h-[50vh] lg:max-h-[55vh] w-auto object-contain rounded-xl sm:rounded-2xl border border-white/10 shadow-lg hover:scale-[1.02] transition-transform duration-300" />
                 <img src={project.col1Image2} alt="SecureCity 2" className="h-full max-h-[35vh] md:max-h-[50vh] lg:max-h-[55vh] w-auto object-contain rounded-xl sm:rounded-2xl border border-white/10 shadow-lg hover:scale-[1.02] transition-transform duration-300" />
                 <img src={project.col2Image} alt="SecureCity 3" className="h-full max-h-[35vh] md:max-h-[50vh] lg:max-h-[55vh] w-auto object-contain rounded-xl sm:rounded-2xl border border-white/10 shadow-lg hover:scale-[1.02] transition-transform duration-300" />
+              </div>
+            ) : images.length > 1 ? (
+              <div className="flex flex-col items-center justify-center w-full h-full max-h-[40vh] md:max-h-[55vh] lg:max-h-[60vh] gap-3">
+                <div className="w-full flex-1 flex items-center justify-center min-h-0">
+                  <img
+                    src={images[activeImgIndex]}
+                    alt={`${project.name} Screenshot ${activeImgIndex + 1}`}
+                    className="max-w-full max-h-[30vh] md:max-h-[42vh] lg:max-h-[46vh] w-auto object-contain rounded-xl sm:rounded-2xl border border-white/10 shadow-xl transition-all duration-300"
+                  />
+                </div>
+                <div className="flex flex-row gap-2 sm:gap-3 justify-center items-center pt-1">
+                  {images.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveImgIndex(idx)}
+                      className={`relative rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                        activeImgIndex === idx
+                          ? 'border-[#D7E2EA] scale-105 shadow-md shadow-white/10 opacity-100'
+                          : 'border-white/20 opacity-60 hover:opacity-100 hover:border-white/50'
+                      }`}
+                    >
+                      <img
+                        src={img}
+                        alt={`Thumbnail ${idx + 1}`}
+                        className="h-10 sm:h-12 w-16 sm:w-20 object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
               </div>
             ) : (
               <div className="w-full h-full max-h-[40vh] md:max-h-[55vh] lg:max-h-[60vh] flex items-center justify-center">
