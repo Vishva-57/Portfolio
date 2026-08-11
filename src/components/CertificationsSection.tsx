@@ -1,4 +1,4 @@
-import { Award, Network, Cpu, Brain, Flame, Cloud } from 'lucide-react';
+import { Award, Network, Cpu, Brain, Flame, Cloud, ShieldCheck } from 'lucide-react';
 import FadeIn from './FadeIn';
 
 interface Certification {
@@ -34,6 +34,14 @@ const CERTIFICATIONS: Certification[] = [
     category: 'Artificial Intelligence',
     description: 'Completed the Google AI Professional Certificate program through Coursera, covering AI fundamentals, prompt engineering, AI-assisted research, content creation, data analysis, communication, and application building.',
     colorClass: 'border-blue-500/20 text-blue-400 bg-blue-950/20 hover:border-blue-500/50',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Google Cybersecurity Professional',
+    issuer: 'Google',
+    category: 'Cybersecurity',
+    description: 'Completed the Google Cybersecurity Professional Certificate covering network security, threat detection, Python scripting, SIEM tools, SQL, and incident response fundamentals.',
+    colorClass: 'border-emerald-500/20 text-emerald-400 bg-emerald-950/20 hover:border-emerald-500/50',
   },
   {
     icon: Cloud,
