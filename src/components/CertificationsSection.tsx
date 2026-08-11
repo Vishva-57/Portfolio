@@ -1,4 +1,4 @@
-import { Award, Network, Cpu, Brain, Flame } from 'lucide-react';
+import { Award, Network, Cpu, Brain, Flame, Cloud } from 'lucide-react';
 import FadeIn from './FadeIn';
 
 interface Certification {
@@ -34,6 +34,14 @@ const CERTIFICATIONS: Certification[] = [
     category: 'Artificial Intelligence',
     description: 'Completed the Google AI Professional Certificate program through Coursera, covering AI fundamentals, prompt engineering, AI-assisted research, content creation, data analysis, communication, and application building.',
     colorClass: 'border-blue-500/20 text-blue-400 bg-blue-950/20 hover:border-blue-500/50',
+  },
+  {
+    icon: Cloud,
+    title: 'Google Cloud Generative AI Leader',
+    issuer: 'Google Cloud',
+    category: 'Generative AI',
+    description: 'A Generative AI Leader understands how Gen AI can transform businesses and uses Google Cloud’s AI solutions to drive innovation. They identify AI opportunities, lead Gen AI initiatives, and promote responsible, enterprise-ready AI adoption across industries.',
+    colorClass: 'border-teal-500/20 text-teal-400 bg-teal-950/20 hover:border-teal-500/50',
   },
   {
     icon: Flame,

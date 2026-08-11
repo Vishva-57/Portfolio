@@ -15,57 +15,62 @@ const HeroSection = () => {
   const [muted, setMuted] = useState(true);
   const [showSoundHint, setShowSoundHint] = useState(true);
 
-  // Attempt unmuted autoplay and fallback to muted if blocked by browser policy
+  // Guarantee muted autoplay on mount for both PC and mobile devices
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
 
-    let cleanupListeners = () => {};
+    // Mobile browsers (iOS Safari, Android Chrome) strictly require muted=true on initial play
+    v.defaultMuted = true;
+    v.muted = true;
+    setMuted(true);
 
-    // Try playing unmuted first
-    v.muted = false;
-    setMuted(false);
+    const playPromise = v.play();
+    if (playPromise !== undefined) {
+      playPromise.catch((err) => {
+        console.log('Initial muted autoplay attempt:', err);
+      });
+    }
 
-    v.play().catch((err) => {
-      console.log('Autoplay unmuted blocked, falling back to muted:', err);
-      // Browser blocked it, so fallback to muted to allow autoplay to start
-      v.muted = true;
-      setMuted(true);
-      v.play().catch((e) => console.error('Muted autoplay failed:', e));
+    let cleanedUp = false;
 
-      // Listen for the first user interaction (click/touch/keypress) to automatically unmute
-      const unmuteOnInteraction = () => {
-        if (v.muted) {
-          v.muted = false;
-          setMuted(false);
-          setShowSoundHint(false);
-        }
-        cleanupListeners();
-      };
+    // Listen for any user interaction (tap/click/keypress) to automatically unmute
+    const unmuteOnInteraction = () => {
+      if (cleanedUp) return;
+      if (v) {
+        v.muted = false;
+        setMuted(false);
+        setShowSoundHint(false);
+        v.play().catch(() => {});
+      }
+      removeInteractionListeners();
+    };
 
-      cleanupListeners = () => {
-        window.removeEventListener('click', unmuteOnInteraction);
-        window.removeEventListener('touchstart', unmuteOnInteraction);
-        window.removeEventListener('keydown', unmuteOnInteraction);
-      };
+    const removeInteractionListeners = () => {
+      cleanedUp = true;
+      window.removeEventListener('click', unmuteOnInteraction);
+      window.removeEventListener('touchstart', unmuteOnInteraction);
+      window.removeEventListener('pointerdown', unmuteOnInteraction);
+      window.removeEventListener('keydown', unmuteOnInteraction);
+    };
 
-      window.addEventListener('click', unmuteOnInteraction);
-      window.addEventListener('touchstart', unmuteOnInteraction);
-      window.addEventListener('keydown', unmuteOnInteraction);
-    });
+    window.addEventListener('click', unmuteOnInteraction, { once: true });
+    window.addEventListener('touchstart', unmuteOnInteraction, { once: true });
+    window.addEventListener('pointerdown', unmuteOnInteraction, { once: true });
+    window.addEventListener('keydown', unmuteOnInteraction, { once: true });
 
     return () => {
-      cleanupListeners();
+      removeInteractionListeners();
     };
   }, []);
 
-  // Auto-hide "Tap for sound" hint after 5 seconds
+  // Auto-hide "Tap for sound" hint after 6 seconds if user hasn't interacted
   useEffect(() => {
-    const t = setTimeout(() => setShowSoundHint(false), 5000);
+    const t = setTimeout(() => setShowSoundHint(false), 6000);
     return () => clearTimeout(t);
   }, []);
 
-  // Auto-mute video when scrolling past hero
+  // Auto-mute video when scrolling past hero section to conserve system/battery resources
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
@@ -86,16 +91,16 @@ const HeroSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Snap-scroll: one wheel tick / keypress while at top → jump to About
+  // Snap-scroll: wheel tick / keypress while at top → jump to About
   useEffect(() => {
     let fired = false;
 
-      const goToAbout = () => {
-        if (fired) return;
-        fired = true;
-        const about = document.getElementById('about');
-        if (about) about.scrollIntoView({ behavior: 'auto', block: 'start' });
-      };
+    const goToAbout = () => {
+      if (fired) return;
+      fired = true;
+      const about = document.getElementById('about');
+      if (about) about.scrollIntoView({ behavior: 'auto', block: 'start' });
+    };
 
     const onWheel = (e: WheelEvent) => {
       if (fired) return;
@@ -122,23 +127,29 @@ const HeroSection = () => {
     };
   }, []);
 
-  const toggleMute = () => {
+  const toggleMute = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     const v = videoRef.current;
     if (!v) return;
-    v.muted = !v.muted;
-    setMuted(v.muted);
+    const newMutedState = !v.muted;
+    v.muted = newMutedState;
+    setMuted(newMutedState);
     setShowSoundHint(false);
+    if (!newMutedState) {
+      v.play().catch(() => {});
+    }
   };
 
   return (
     <section ref={sectionRef} className="relative h-screen w-full overflow-hidden bg-black">
-      {/* Video background */}
+      {/* Video background with full mobile inline playback support */}
       <video
         ref={videoRef}
         autoPlay
         muted={muted}
         loop
         playsInline
+        webkit-playsinline="true"
         preload="auto"
         className="absolute inset-0 h-full w-full object-cover"
       >
@@ -230,10 +241,10 @@ const HeroSection = () => {
 
           {/* Mute toggle + Sound hint */}
           <FadeIn delay={1.1} y={20}>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5 sm:gap-3">
               {showSoundHint && (
                 <span
-                  className="hidden sm:inline text-[10px] font-medium uppercase tracking-[0.25em] text-white/80"
+                  className="inline-flex text-[9px] sm:text-[10px] font-medium uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/90 bg-black/40 px-2.5 py-1 rounded-full border border-white/10 backdrop-blur-sm"
                   style={{ animation: 'pulseFade 2s ease-in-out infinite' }}
                 >
                   Tap for sound
@@ -242,7 +253,7 @@ const HeroSection = () => {
               <button
                 onClick={toggleMute}
                 aria-label={muted ? 'Unmute video' : 'Mute video'}
-                className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md transition hover:bg-white/20 hover:scale-110"
+                className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md transition hover:bg-white/20 hover:scale-110 active:scale-95"
               >
                 {muted ? (
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

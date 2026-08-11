@@ -141,10 +141,10 @@ const ProjectCard = ({ project, index, total, containerRef }: ProjectCardProps) 
           {/* Right Column: Images */}
           <div className="w-full md:h-full flex items-center justify-center min-h-0 overflow-visible md:overflow-hidden py-4 md:py-0">
             {project.name === 'SecureCity' ? (
-              <div className="flex flex-row gap-2 sm:gap-3.5 h-full max-h-[40vh] md:max-h-[55vh] lg:max-h-[60vh] justify-center items-center w-full">
-                <img src={project.col1Image1} alt="SecureCity 1" className="h-full max-h-[35vh] md:max-h-[50vh] lg:max-h-[55vh] w-auto object-contain rounded-xl sm:rounded-2xl border border-white/10 shadow-lg hover:scale-[1.02] transition-transform duration-300" />
-                <img src={project.col1Image2} alt="SecureCity 2" className="h-full max-h-[35vh] md:max-h-[50vh] lg:max-h-[55vh] w-auto object-contain rounded-xl sm:rounded-2xl border border-white/10 shadow-lg hover:scale-[1.02] transition-transform duration-300" />
-                <img src={project.col2Image} alt="SecureCity 3" className="h-full max-h-[35vh] md:max-h-[50vh] lg:max-h-[55vh] w-auto object-contain rounded-xl sm:rounded-2xl border border-white/10 shadow-lg hover:scale-[1.02] transition-transform duration-300" />
+              <div className="flex flex-row gap-1.5 sm:gap-3.5 h-full max-h-[35vh] sm:max-h-[45vh] md:max-h-[55vh] lg:max-h-[60vh] justify-center items-center w-full px-0.5 sm:px-0">
+                <img src={project.col1Image1} alt="SecureCity 1" className="w-[31%] sm:w-auto h-auto sm:h-full max-h-[28vh] sm:max-h-[40vh] md:max-h-[50vh] lg:max-h-[55vh] object-contain rounded-lg sm:rounded-2xl border border-white/10 shadow-lg hover:scale-[1.02] transition-transform duration-300 flex-shrink-0 sm:flex-shrink" />
+                <img src={project.col1Image2} alt="SecureCity 2" className="w-[31%] sm:w-auto h-auto sm:h-full max-h-[28vh] sm:max-h-[40vh] md:max-h-[50vh] lg:max-h-[55vh] object-contain rounded-lg sm:rounded-2xl border border-white/10 shadow-lg hover:scale-[1.02] transition-transform duration-300 flex-shrink-0 sm:flex-shrink" />
+                <img src={project.col2Image} alt="SecureCity 3" className="w-[31%] sm:w-auto h-auto sm:h-full max-h-[28vh] sm:max-h-[40vh] md:max-h-[50vh] lg:max-h-[55vh] object-contain rounded-lg sm:rounded-2xl border border-white/10 shadow-lg hover:scale-[1.02] transition-transform duration-300 flex-shrink-0 sm:flex-shrink" />
               </div>
             ) : images.length > 1 ? (
               <div className="flex flex-col items-center justify-center w-full h-full max-h-[40vh] md:max-h-[55vh] lg:max-h-[60vh] gap-3">
