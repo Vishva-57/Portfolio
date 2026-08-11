@@ -20,9 +20,11 @@ Built with **React + TypeScript + Vite + Tailwind CSS + Framer Motion**. Designe
 3. **Education** — Glowing vertical timeline linking Vellore Institute of Technology, Velammal Bodhi Campus, and Vidya Mandir School.
 4. **Services** — Web Development, App Development, UI/UX Design.
 5. **Projects** — Sticky-stacking card showcases:
-   - **SecureCity** (Mobile App Development): Flutter application for urban safety, including live map tracking, emergency SOS support, and a pet adoption portal. Features horizontal mobile screens, direct APK downloads (`securecity.apk`), and github repository buttons.
-   - **Smart Classroom** (Web Platform): Attendance scanner management platform with anti-proxy QR codes. Linked to live deployment on Render and GitHub repo.
-6. **Certifications** — Google AI Professional Certificate, Network Basics (Cisco), IoT (Cisco), AI Tools Workshop (B10x).
+   - **SecureCity** (Mobile App Development): Flutter application for urban safety.
+   - **Smart Classroom** (Web Platform): Attendance management platform with anti-proxy QR codes.
+   - **Basilisk Blind Spot** (AI Web Platform): Web accessibility auditing platform against WCAG standards.
+   - **Crisis Alert System** (Crisis & Incident Management): Real-time emergency dispatch and campus incident response platform.
+6. **Certifications** — Google AI Professional Certificate, Google Cybersecurity Professional, Google Cloud Generative AI Leader, Network Basics, IoT, AI Tools Workshop.
 7. **Contact** — Email, WhatsApp, LinkedIn, GitHub.
 
 ## Run locally
@@ -67,6 +69,8 @@ src/
 |---|---|---|
 | SecureCity | `/securecity.apk` (Download APK) | [github.com/Vishva-57/SecureCity](https://github.com/Vishva-57/SecureCity) |
 | Smart Classroom | [smart-classroom-system-etvl.onrender.com](https://smart-classroom-system-etvl.onrender.com/) | [github.com/Vishva-57/Smart-Classroom-System](https://github.com/Vishva-57/Smart-Classroom-System) |
+| Basilisk Blind Spot | [basiliskblindspot.netlify.app](https://basiliskblindspot.netlify.app/) | [github.com/Vishva-57/Basilisk-Blind-Spot](https://github.com/Vishva-57/Basilisk-Blind-Spot/) |
+| Crisis Alert System | [crisis-alert-system-iota.vercel.app](https://crisis-alert-system-iota.vercel.app/) | [github.com/Vishva-57/Crisis_Alert_System](https://github.com/Vishva-57/Crisis_Alert_System) |
 
 ## Credits
 

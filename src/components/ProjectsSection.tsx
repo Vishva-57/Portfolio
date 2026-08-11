@@ -55,6 +55,19 @@ Tech Stack: Next.js, TypeScript, Playwright, Axe-core, Prisma, Tailwind CSS, Ver
     col1Image2: '/basilisk-2.png',
     col2Image: '/basilisk-3.png',
   },
+  {
+    number: '04',
+    category: 'Crisis & Incident Management',
+    name: 'Crisis Alert System',
+    description: `Crisis Alert System is a real-time emergency dispatch and campus incident management platform. Features slide-to-dispatch emergency reporting (Fire, Medical, Security), live interactive command map tracking, evidence collection (photo/video clip recording), safety equipment locator, and AI-powered emergency briefing generation.
+
+Tech Stack: Next.js, React, Tailwind CSS, Leaflet, OpenStreetMap, Vercel 🚀`,
+    liveUrl: 'https://crisis-alert-system-iota.vercel.app/',
+    githubUrl: 'https://github.com/Vishva-57/Crisis_Alert_System',
+    col1Image1: '/crisis-1.png',
+    col1Image2: '/crisis-2.png',
+    col2Image: '/crisis-3.png',
+  },
 ];
 
 interface ProjectCardProps {
